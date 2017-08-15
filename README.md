@@ -26,3 +26,14 @@ $databases['migrate_kgaut_d7']['default']['prefix'] = 'kgaut_';
 **Note : ** La clée est ici `migrate_kgaut_d7`, c'est celle qui doit être
 renseignée dans le fichier définissant votre groupe de migrations, cf
 `migrate_plus.migration_group.kgaut.yml`.
+
+
+## Les commandes drush
+
+nous supposerons ici que l'alias défini est @kg et que le group est
+`kgaut` (oui je suis très égocentrique, mais c'est mon site après tout).
+
+`drush @kg ms` : status des migration
+`drush @kg mi kgaut_article_tags` : lancer une migration
+`drush @kg mi --group=kgaut` : lancer un groupe de migrations
+`drush @kg migrate-reset-status kgaut_article_tags` remettre à zero une migration plantée
