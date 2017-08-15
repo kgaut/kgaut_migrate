@@ -1,0 +1,17 @@
+{
+  "name": "kgaut/kgaut_migrate",
+  "type": "drupal-module",
+  "description": "Migrate stuff to upgrade kgaut.net from Drupal 6 to Drupal 7",
+  "keywords": ["Drupal","Migrate"],
+  "license": "GPL-2.0+",
+  "homepage": "https://github.com/kgaut/kgaut_migrate",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://github.com/kgaut/kgaut_migrate/issues",
+    "source": "https://github.com/kgaut/kgaut_migrate/"
+  },
+  "require": {
+    "drupal/migrate_plus": "^4.0",
+    "drupal/migrate_tools": "^4.0"
+  }
+}
