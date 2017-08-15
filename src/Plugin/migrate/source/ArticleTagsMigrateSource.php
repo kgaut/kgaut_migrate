@@ -13,7 +13,7 @@ namespace Drupal\kgaut_migrate\Plugin\migrate\source;
  *   id = "article_tags_migration"
  * )
  */
-class ArticleTagsMigrateSource extends TaxonomyTermMigrateSource {
+class ArticleTagsMigrateSource extends KgautTaxonomyTermMigrateSource {
 
   protected static $vocabulary_id = 3;
 

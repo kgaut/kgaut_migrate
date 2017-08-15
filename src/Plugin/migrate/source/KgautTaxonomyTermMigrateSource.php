@@ -1,21 +1,10 @@
 <?php
-/**
- * @file
- * Contains \Drupal\kgaut_migrate\Plugin\migrate\source\Term_Tags.
- */
 
 namespace Drupal\kgaut_migrate\Plugin\migrate\source;
 
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 
-/**
- * Taxonomy: Tags.
- *
- * @MigrateSource(
- *   id = "snippet_tags_migration"
- * )
- */
-abstract class TaxonomyTermMigrateSource extends SqlBase {
+abstract class KgautTaxonomyTermMigrateSource extends SqlBase {
 
   protected static $vocabulary_id;
 
