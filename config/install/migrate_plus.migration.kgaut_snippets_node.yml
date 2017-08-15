@@ -24,6 +24,9 @@ process:
   # YAML special character.
   'body/value': body_value
   'body/summary': body_summary
+  'body/format':
+    plugin: default_value
+    default_value: 'full_html'
 # Our beer nodes have references to terms and users, so we want those to be
 # imported first. We make that dependency explicit here - by putting those
 # migrations under the 'required' key, we ensure that the tools will prevent
