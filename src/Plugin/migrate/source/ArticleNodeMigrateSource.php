@@ -48,6 +48,7 @@ class ArticleNodeMigrateSource extends SqlBase {
       'body' => $this->t('body'),
       'excerpt' => $this->t('Résumé'),
       'uid' => $this->t('Account ID of the author'),
+      'tags' => $this->t("Tags de l'article"),
     ];
 
     return $fields;
@@ -63,6 +64,22 @@ class ArticleNodeMigrateSource extends SqlBase {
         'alias' => 'n',
       ],
     ];
+  }
+
+  public function prepareRow(Row $row) {
+    /**
+     * As explained above, we need to pull the style relationships into our
+     * source row here, as an array of 'style' values (the unique ID for
+     * the beer_term migration).
+     */
+    $query = $this->select('field_data_taxonomy_vocabulary_3', 'ft');
+    $query->addField('ft', 'taxonomy_vocabulary_3_tid', 'tid');
+    $query->condition('entity_id', $row->getSourceProperty('nid'));
+    $query->condition('bundle', 'story');
+    $terms = $query->execute()->fetchCol();
+    $row->setSourceProperty('tags', $terms);
+    dd($terms);
+    return parent::prepareRow($row);
   }
 
 }

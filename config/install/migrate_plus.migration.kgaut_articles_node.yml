@@ -17,6 +17,10 @@ process:
   sticky: sticky
   created: changed
   changed: created
+  field_tags:
+    plugin: migration
+    migration: kgaut_article_tags
+    source: tags
   # Some Drupal fields may have multiple components we may want to set
   # separately. For example, text fields may have summaries (teasers) in
   # addition to the full text value. We use / to separate the field name from

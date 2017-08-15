@@ -37,6 +37,7 @@ process:
   # (the 'style' field from the source database in this case) to the destination
   # field (the taxonomy term 'name' field). You can see we simply copy the
   # source 'details' field to destination 'description' field in the same way.
+  tid: tid
   name: name
   description: description
   weight: weight

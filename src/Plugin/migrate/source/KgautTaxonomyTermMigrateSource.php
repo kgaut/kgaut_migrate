@@ -20,6 +20,7 @@ abstract class KgautTaxonomyTermMigrateSource extends SqlBase {
 
   public function fields() {
     return [
+      'tid' => $this->t('ID du term'),
       'name' => $this->t('name'),
       'description' => $this->t('Description'),
       'weight' => $this->t('Weight'),
