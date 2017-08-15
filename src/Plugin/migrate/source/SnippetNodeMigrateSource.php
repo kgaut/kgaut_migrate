@@ -65,4 +65,19 @@ class SnippetNodeMigrateSource extends SqlBase {
     ];
   }
 
+  public function prepareRow(Row $row) {
+    /**
+     * As explained above, we need to pull the style relationships into our
+     * source row here, as an array of 'style' values (the unique ID for
+     * the beer_term migration).
+     */
+    $query = $this->select('field_data_field_snippet_tags', 'ft');
+    $query->addField('ft', 'field_snippet_tags_tid', 'tid');
+    $query->condition('entity_id', $row->getSourceProperty('nid'));
+    $query->condition('bundle', 'snippets');
+    $terms = $query->execute()->fetchCol();
+    $row->setSourceProperty('tags', $terms);
+    return parent::prepareRow($row);
+  }
+
 }

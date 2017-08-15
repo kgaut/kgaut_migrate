@@ -78,7 +78,6 @@ class ArticleNodeMigrateSource extends SqlBase {
     $query->condition('bundle', 'story');
     $terms = $query->execute()->fetchCol();
     $row->setSourceProperty('tags', $terms);
-    dd($terms);
     return parent::prepareRow($row);
   }
 
