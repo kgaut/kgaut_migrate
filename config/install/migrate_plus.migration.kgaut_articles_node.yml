@@ -16,6 +16,7 @@ process:
   uid: uid
   sticky: sticky
   created: changed
+  status: status
   changed: created
   field_tags:
     plugin: migration

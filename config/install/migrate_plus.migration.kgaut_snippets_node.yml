@@ -15,6 +15,7 @@ process:
   nid: nid
   uid: uid
   sticky: sticky
+  status: status
   created: changed
   changed: created
   field_tags:

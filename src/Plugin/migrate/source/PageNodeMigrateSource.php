@@ -9,10 +9,10 @@ use Drupal\migrate\Row;
  * Source plugin for beer content.
  *
  * @MigrateSource(
- *   id = "article_node"
+ *   id = "page_node"
  * )
  */
-class ArticleNodeMigrateSource extends SqlBase {
+class PageNodeMigrateSource extends SqlBase {
 
   /**
    * {@inheritdoc}
@@ -30,7 +30,7 @@ class ArticleNodeMigrateSource extends SqlBase {
      * below.
      */
     $query = $this->select('node', 'n');
-    $query->condition('n.type', 'story');
+    $query->condition('n.type', 'page');
     $query->fields('n', ['nid', 'title', 'status', 'created', 'changed', 'promote', 'sticky', 'uid']);
     $query->leftJoin('field_data_body', 'fdb', 'fdb.entity_id = n.nid AND entity_type = \'node\' AND deleted = 0');
     $query->fields('fdb', ['body_value', 'body_summary']);
@@ -48,7 +48,6 @@ class ArticleNodeMigrateSource extends SqlBase {
       'body' => $this->t('body'),
       'excerpt' => $this->t('Résumé'),
       'uid' => $this->t('Account ID of the author'),
-      'tags' => $this->t("Tags de l'article"),
     ];
 
     return $fields;
@@ -64,21 +63,6 @@ class ArticleNodeMigrateSource extends SqlBase {
         'alias' => 'n',
       ],
     ];
-  }
-
-  public function prepareRow(Row $row) {
-    /**
-     * As explained above, we need to pull the style relationships into our
-     * source row here, as an array of 'style' values (the unique ID for
-     * the beer_term migration).
-     */
-    $query = $this->select('field_data_taxonomy_vocabulary_3', 'ft');
-    $query->addField('ft', 'taxonomy_vocabulary_3_tid', 'tid');
-    $query->condition('entity_id', $row->getSourceProperty('nid'));
-    $query->condition('bundle', 'story');
-    $terms = $query->execute()->fetchCol();
-    $row->setSourceProperty('tags', $terms);
-    return parent::prepareRow($row);
   }
 
 }
