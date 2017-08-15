@@ -17,7 +17,6 @@ use Drupal\migrate\Plugin\migrate\source\SqlBase;
  */
 class ArticleTagsMigrateSource extends SqlBase {
 
-  protected static $vocabulary_machine_name = 'vocabulary_3';
   protected static $vocabulary_id = 3;
 
   public function query() {
