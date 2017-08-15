@@ -23,3 +23,6 @@ $databases['migrate_kgaut_d7']['default']['database'] = 'kgaut_net_d7';
 $databases['migrate_kgaut_d7']['default']['prefix'] = 'kgaut_';
 ```
 
+**Note : ** La clée est ici `migrate_kgaut_d7`, c'est celle qui doit être
+renseignée dans le fichier définissant votre groupe de migrations, cf
+`migrate_plus.migration_group.kgaut.yml`.

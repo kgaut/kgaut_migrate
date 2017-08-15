@@ -27,7 +27,7 @@ shared_configuration:
     # A better practice for real-world migrations would be to add a database
     # connection to your external database in settings.php and reference its
     # key here.
-    key: migrate
+    key: migrate_kgaut_d7
 
 # As with the migration configuration (see beer_term), we add an enforced
 # dependency so the migration_group configuration will be removed on module
