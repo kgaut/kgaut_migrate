@@ -10,11 +10,11 @@ namespace Drupal\kgaut_migrate\Plugin\migrate\source;
  * Taxonomy: Tags.
  *
  * @MigrateSource(
- *   id = "article_tags_migration"
+ *   id = "snippet_tags_migration"
  * )
  */
-class ArticleTagsMigrateSource extends TaxonomyTermMigrateSource {
+class SnippetTagsMigrateSource extends TaxonomyTermMigrateSource {
 
-  protected static $vocabulary_id = 3;
+  protected static $vocabulary_id = 7;
 
 }
