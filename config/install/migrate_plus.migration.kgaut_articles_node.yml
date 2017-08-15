@@ -3,7 +3,7 @@ id: kgaut_articles_node
 label: Articles de blog
 migration_group: kgaut
 source:
-  plugin: snippet_node
+  plugin: article_node
 destination:
   plugin: entity:node
 process:

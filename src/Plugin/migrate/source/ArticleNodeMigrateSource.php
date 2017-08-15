@@ -30,7 +30,7 @@ class ArticleNodeMigrateSource extends SqlBase {
      * below.
      */
     $query = $this->select('node', 'n');
-    $query->condition('n.type', 'snippets');
+    $query->condition('n.type', 'story');
     $query->fields('n', ['nid', 'title', 'status', 'created', 'changed', 'promote', 'sticky', 'uid']);
     $query->join('field_data_body', 'fdb', 'fdb.entity_id = n.nid AND entity_type = \'node\' AND deleted = 0');
     $query->fields('fdb', ['body_value', 'body_summary']);
