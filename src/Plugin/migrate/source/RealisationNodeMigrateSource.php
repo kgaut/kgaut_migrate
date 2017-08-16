@@ -78,7 +78,6 @@ class RealisationNodeMigrateSource extends SqlBase {
     $query->condition('entity_id', $row->getSourceProperty('nid'));
     $query->condition('bundle', 'realisation');
     $terms = $query->execute()->fetchCol();
-    dd($terms);
     $row->setSourceProperty('tags', $terms);
     return parent::prepareRow($row);
   }

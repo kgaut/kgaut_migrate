@@ -28,6 +28,47 @@ renseignée dans le fichier définissant votre groupe de migrations, cf
 `migrate_plus.migration_group.kgaut.yml`.
 
 
+## Les migrations
+
+### Termes de Taxonomy
+
+#### kgaut_article_tags
+Terms utilisés pour tagguer les contenus "Articles"
+  - Configuration : `migrate_plus.migration.kgaut_article_tags.yml`
+  - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\ArticleTagsMigrateSource.php`
+
+#### kgaut_realisation_tags
+Terms utilisés pour tagguer les contenus "Realisation"
+  - Configuration : `migrate_plus.migration.kgaut_realisation_tags.yml`
+  - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\RealisationTagsMigrateSource.php`
+
+#### kgaut_snippet_tags
+Terms utilisés pour tagguer les contenus "Tags"
+  - Configuration : `migrate_plus.migration.kgaut_snippet_tags.yml`
+  - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\SnippetTagsMigrateSource.php`
+
+### Noeuds
+
+#### kgaut_articles_node
+Migration des noeuds du type de contenu `story` (le site est à l'origine un d6) vers `article`.
+  - Configuration : `migrate_plus.migration.kgaut_articles_node.yml`
+  - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\ArticleNodeMigrateSource.php`
+
+#### kgaut_page_node
+Migration des noeuds du type de contenu `page` vers `page`.
+  - Configuration : `migrate_plus.migration.kgaut_page_node.yml`
+  - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\PageNodeMigrateSource.php`
+
+#### kgaut_realisation_node
+Migration des noeuds du type de contenu `realisation` vers `realisation`.
+  - Configuration : `migrate_plus.migration.kgaut_realisation_node.yml`
+  - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\RealisationNodeMigrateSource.php`
+
+#### kgaut_snippets_node
+Migration des noeuds du type de contenu `snippet` vers `snippet`.
+  - Configuration : `migrate_plus.migration.kgaut_snippets_node.yml`
+  - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\SnippetNodeMigrateSource.php`
+
 ## Les commandes drush
 
 nous supposerons ici que l'alias défini est @kg et que le group est
@@ -36,4 +77,4 @@ nous supposerons ici que l'alias défini est @kg et que le group est
 `drush @kg ms` : status des migration
 `drush @kg mi kgaut_article_tags` : lancer une migration
 `drush @kg mi --group=kgaut` : lancer un groupe de migrations
-`drush @kg migrate-reset-status kgaut_article_tags` remettre à zero une migration plantée
+`drush @kg mrs kgaut_article_tags` remettre à zero une migration plantée
