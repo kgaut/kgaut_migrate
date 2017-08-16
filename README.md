@@ -49,6 +49,13 @@ drush @kg mi --group=kgaut //Lancement des migrations
 
 ### Termes de Taxonomy
 
+#### kgaut_managed_files
+Migration des fichiers (`managed_file`),
+  - Configuration : `migrate_plus.migration.kgaut_managed_files.yml`
+  - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\KgautManagedFiles.php`
+Attention, ce script ne migre pas *physiquement* les fichiers, le transfert
+se fait via rsync.
+
 #### kgaut_article_tags
 Terms utilisés pour tagguer les contenus "Articles"
   - Configuration : `migrate_plus.migration.kgaut_article_tags.yml`

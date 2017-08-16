@@ -1,0 +1,23 @@
+id: kgaut_managed_files
+label: Migration des fichiers
+migration_group: kgaut
+source:
+  plugin: kgaut_managed_files
+
+destination:
+  plugin: entity:file
+
+process:
+  fid: fid
+  uid: uid
+  filename: filename
+  uri: uri
+  filemime: filemime
+  filesize: filesize
+  created: timestamp
+  changed: timestamp
+migration_dependencies: {}
+dependencies:
+  enforced:
+    module:
+      - kgaut_migrate
