@@ -74,7 +74,7 @@ Migration des noeuds du type de contenu `snippet` vers `snippet`.
 nous supposerons ici que l'alias défini est @kg et que le group est
 `kgaut` (oui je suis très égocentrique, mais c'est mon site après tout).
 
-`drush @kg ms` : status des migration
-`drush @kg mi kgaut_article_tags` : lancer une migration
-`drush @kg mi --group=kgaut` : lancer un groupe de migrations
-`drush @kg mrs kgaut_article_tags` remettre à zero une migration plantée
+ - `drush @kg ms` : status des migration
+ - `drush @kg mi kgaut_article_tags` : lancer une migration
+ - `drush @kg mi --group=kgaut` : lancer un groupe de migrations
+ - `drush @kg mrs kgaut_article_tags` remettre à zero une migration plantée
