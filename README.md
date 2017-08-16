@@ -47,7 +47,7 @@ drush @kg mi --group=kgaut //Lancement des migrations
 ```
 ## Les migrations
 
-### Termes de Taxonomy
+### Fichiers
 
 #### kgaut_managed_files
 Migration des fichiers (`managed_file`),
@@ -55,6 +55,8 @@ Migration des fichiers (`managed_file`),
   - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\KgautManagedFiles.php`
 Attention, ce script ne migre pas *physiquement* les fichiers, le transfert
 se fait via rsync.
+
+### Termes de Taxonomy
 
 #### kgaut_article_tags
 Terms utilisés pour tagguer les contenus "Articles"
