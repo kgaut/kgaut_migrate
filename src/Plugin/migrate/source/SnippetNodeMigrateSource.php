@@ -31,7 +31,7 @@ class SnippetNodeMigrateSource extends SqlBase {
      */
     $query = $this->select('node', 'n');
     $query->condition('n.type', 'snippets');
-    $query->fields('n', ['nid', 'title', 'status', 'created', 'changed', 'promote', 'sticky', 'uid']);
+    $query->fields('n', ['nid', 'vid', 'title', 'status', 'created', 'changed', 'promote', 'sticky', 'uid']);
     $query->leftJoin('field_data_body', 'fdb', 'fdb.entity_id = n.nid AND entity_type = \'node\' AND deleted = 0');
     $query->fields('fdb', ['body_value', 'body_summary']);
 

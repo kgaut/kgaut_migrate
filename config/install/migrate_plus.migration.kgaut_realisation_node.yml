@@ -13,6 +13,7 @@ process:
     default_value: realisation
   title: title
   nid: nid
+  vid: vid
   uid: uid
   sticky: sticky
   status: status

@@ -31,7 +31,7 @@ class RealisationNodeMigrateSource extends SqlBase {
      */
     $query = $this->select('node', 'n');
     $query->condition('n.type', 'realisation');
-    $query->fields('n', ['nid', 'title', 'status', 'created', 'changed', 'promote', 'sticky', 'uid']);
+    $query->fields('n', ['nid', 'vid', 'title', 'status', 'created', 'changed', 'promote', 'sticky', 'uid']);
     $query->leftJoin('field_data_body', 'fdb', 'fdb.entity_id = n.nid AND fdb.entity_type = \'node\' AND fdb.deleted = 0');
     $query->leftJoin('field_data_field_realisation_missions', 'frm', 'frm.entity_id = n.nid AND frm.entity_type = \'node\' AND frm.deleted = 0');
     $query->fields('fdb', ['body_value', 'body_summary']);
