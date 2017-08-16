@@ -28,6 +28,23 @@ renseignée dans le fichier définissant votre groupe de migrations, cf
 `migrate_plus.migration_group.kgaut.yml`.
 
 
+## Processus
+
+À chaque fois que vous modifiez / ajoutez un fichier de configuration de
+migration, vous devez réinstaller le module. (NDLR : si quelqu'un a un
+truc pour ça, je suis preneur)
+
+Note : nous supposerons ici que l'alias défini est @kg et que le group est
+`kgaut` (oui je suis très égocentrique, mais c'est mon site après tout).
+
+Voici donc les commandes à lancer à chaque test :
+
+```
+drush @kg mr --group=kgaut // Rollback des migrations (suppression des contenus importés)
+drush @kg pmu kgaut_migrate // Désinstallation du module
+drush @kg en kgaut_migrate // installation du module
+drush @kg mi --group=kgaut //Lancement des migrations
+```
 ## Les migrations
 
 ### Termes de Taxonomy
@@ -70,9 +87,6 @@ Migration des noeuds du type de contenu `snippet` vers `snippet`.
   - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\SnippetNodeMigrateSource.php`
 
 ## Les commandes drush
-
-nous supposerons ici que l'alias défini est @kg et que le group est
-`kgaut` (oui je suis très égocentrique, mais c'est mon site après tout).
 
  - `drush @kg ms` : status des migration
  - `drush @kg mi kgaut_article_tags` : lancer une migration
