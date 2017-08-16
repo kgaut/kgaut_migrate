@@ -32,8 +32,10 @@ class ArticleNodeMigrateSource extends SqlBase {
     $query = $this->select('node', 'n');
     $query->condition('n.type', 'story');
     $query->fields('n', ['nid', 'vid', 'title', 'status', 'created', 'changed', 'promote', 'sticky', 'uid']);
-    $query->leftJoin('field_data_body', 'fdb', 'fdb.entity_id = n.nid AND entity_type = \'node\' AND deleted = 0');
+    $query->leftJoin('field_data_body', 'fdb', 'fdb.entity_id = n.nid AND fdb.entity_type = \'node\' AND fdb.deleted = 0');
     $query->fields('fdb', ['body_value', 'body_summary']);
+    $query->leftJoin('field_data_field_article_image', 'fai', 'fai.entity_id = n.nid AND fai.entity_type = \'node\' AND fai.deleted = 0');
+    $query->fields('fai', ['field_article_image_fid', 'field_article_image_alt', 'field_article_image_title', '	field_article_image_width', 'field_article_image_height']);
 
     return $query;
   }

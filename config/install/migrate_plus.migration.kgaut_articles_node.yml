@@ -33,6 +33,11 @@ process:
   'body/format':
     plugin: default_value
     default_value: 'full_html'
+  'field_image/target_id': field_article_image_fid
+  'field_image/alt': field_article_image_alt
+  'field_image/title': field_article_image_title
+  'field_image/width': field_article_image_width
+  'field_image/height': field_article_image_height
 # Our beer nodes have references to terms and users, so we want those to be
 # imported first. We make that dependency explicit here - by putting those
 # migrations under the 'required' key, we ensure that the tools will prevent

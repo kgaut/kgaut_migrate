@@ -80,6 +80,9 @@ Migration des noeuds du type de contenu `story` (le site est à l'origine un d6)
   - Configuration : `migrate_plus.migration.kgaut_articles_node.yml`
   - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\ArticleNodeMigrateSource.php`
 
+Particularités :
+  - Import d'un champ « image » (`field_article_image` vers `field_image`)
+
 #### kgaut_page_node
 Migration des noeuds du type de contenu `page` vers `page`.
   - Configuration : `migrate_plus.migration.kgaut_page_node.yml`
