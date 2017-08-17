@@ -13,45 +13,73 @@ use Drupal\migrate\Row;
 class kgautManagedFiles extends SqlBase {
 
   /**
+   * The public file directory path.
+   *
+   * @var string
+   */
+  protected $publicPath;
+
+  /**
+   * The private file directory path, if any.
+   *
+   * @var string
+   */
+  protected $privatePath;
+
+  /**
+   * The temporary file directory path.
+   *
+   * @var string
+   */
+  protected $temporaryPath;
+
+  /**
    * {@inheritdoc}
    */
   public function query() {
-    $query = $this->select('file_managed', 'fm');
-    $query->fields('fm', ['fid', 'uid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'origname', 'type']);
-
+    $query = $this->select('file_managed', 'fm')
+      ->fields('fm')
+      ->orderBy('fm.timestamp');
     return $query;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function fields() {
-    $fields = [
-      'nid' => $this->t('ID'),
-      'title' => $this->t('Title'),
-      'body' => $this->t('body'),
-      'excerpt' => $this->t('Résumé'),
-      'uid' => $this->t('Account ID of the author'),
-      'tags' => $this->t("Tags de l'article"),
-    ];
+  public function prepareRow(Row $row) {
+    // Compute the filepath property, which is a physical representation of
+    // the URI relative to the Drupal root.
+    $path = str_replace(['public:/', 'private:/', 'temporary:/'], [$this->publicPath, $this->privatePath, $this->temporaryPath], $row->getSourceProperty('uri'));
+    // At this point, $path could be an absolute path or a relative path,
+    // depending on how the scheme's variable was set. So we need to shear out
+    // the source_base_path in order to make them all relative.
+    $path = str_replace($this->configuration['constants']['source_base_path'], NULL, $path);
+    $row->setSourceProperty('filepath', $path);
+    return parent::prepareRow($row);
+  }
 
-    return $fields;
+  /**
+   * {@inheritdoc}
+   */
+  public function fields() {
+    return [
+      'fid' => $this->t('File ID'),
+      'uid' => $this->t('The {users}.uid who added the file. If set to 0, this file was added by an anonymous user.'),
+      'filename' => $this->t('File name'),
+      'filepath' => $this->t('File path'),
+      'filemime' => $this->t('File MIME Type'),
+      'status' => $this->t('The published status of a file.'),
+      'timestamp' => $this->t('The time that the file was added.'),
+    ];
   }
 
   /**
    * {@inheritdoc}
    */
   public function getIds() {
-    return [
-      'fid' => [
-        'type' => 'integer',
-        'alias' => 'fm',
-      ],
-    ];
+    $ids['fid']['type'] = 'integer';
+    return $ids;
   }
 
-  public function prepareRow(Row $row) {
-    return parent::prepareRow($row);
-  }
 
 }

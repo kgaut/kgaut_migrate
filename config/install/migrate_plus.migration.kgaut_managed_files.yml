@@ -3,21 +3,40 @@ label: Migration des fichiers
 migration_group: kgaut
 source:
   plugin: kgaut_managed_files
-
-destination:
-  plugin: entity:file
-
+  scheme: public
+  constants:
+    # The tool configuring this migration must set source_base_path. It
+    # represents the fully qualified path relative to which URIs in the files
+    # table are specified, and must end with a /. See source_full_path
+    # configuration in this migration's process pipeline as an example.
+    source_base_path: '/media/vhosts/d7.kgaut.net/www/sites/kgaut.net/files'
 process:
+  # If you are using this file to build a custom migration consider removing
+  # the fid field to allow incremental migrations.
   fid: fid
-  uid: uid
   filename: filename
-  uri: uri
+  source_full_path:
+    -
+      plugin: concat
+      delimiter: /
+      source:
+        - constants/source_base_path
+        - filepath
+    -
+      plugin: urlencode
+  uri:
+    plugin: file_copy
+    source:
+      - '@source_full_path'
+      - uri
   filemime: filemime
-  filesize: filesize
+  # No need to migrate filesize, it is computed when file entities are saved.
+  # filesize: filesize
+  status: status
+  # Drupal 7 didn't keep track of the file's creation or update time -- all it
+  # had was the vague "timestamp" column. So we'll use it for both.
   created: timestamp
   changed: timestamp
-migration_dependencies: {}
-dependencies:
-  enforced:
-    module:
-      - kgaut_migrate
+  uid: uid
+destination:
+  plugin: entity:file

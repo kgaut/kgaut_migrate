@@ -64,8 +64,7 @@ drush @kg mi --group=kgaut
 Migration des fichiers (`managed_file`),
   - Configuration : `migrate_plus.migration.kgaut_managed_files.yml`
   - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\KgautManagedFiles.php`
-Attention, ce script ne migre pas *physiquement* les fichiers, le transfert
-se fait via rsync.
+Ce script importe maintenant les fichiers.
 
 ### Termes de Taxonomy
 
