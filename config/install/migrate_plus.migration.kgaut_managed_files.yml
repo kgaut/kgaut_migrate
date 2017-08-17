@@ -40,3 +40,7 @@ process:
   uid: uid
 destination:
   plugin: entity:file
+dependencies:
+  enforced:
+    module:
+      - kgaut_migrate
