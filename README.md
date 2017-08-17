@@ -31,19 +31,30 @@ renseignée dans le fichier définissant votre groupe de migrations, cf
 ## Processus
 
 À chaque fois que vous modifiez / ajoutez un fichier de configuration de
-migration, vous devez réinstaller le module. (NDLR : si quelqu'un a un
-truc pour ça, je suis preneur)
+migration, vous devez réimporter la configuration du module dans le site.
+
+Pour cela, la première solution est de réinstaller le module. Sinon vous
+pouvez faire un import partiel de configuration, je privilegie la seconde
+solution.
 
 Note : nous supposerons ici que l'alias défini est @kg et que le group est
 `kgaut` (oui je suis très égocentrique, mais c'est mon site après tout).
 
 Voici donc les commandes à lancer à chaque test :
 
+### Solution 1 : Réinstallation du module
+
 ```
 drush @kg mr --group=kgaut // Rollback des migrations (suppression des contenus importés)
 drush @kg pmu kgaut_migrate // Désinstallation du module
 drush @kg en kgaut_migrate // installation du module
 drush @kg mi --group=kgaut //Lancement des migrations
+```
+### Solution 2 import partiel de la configuration
+```
+drush @kg mr --group=kgaut
+drush @kg cim --source=modules/kgaut_migrate/config/install --partial -y
+drush @kg mi --group=kgaut
 ```
 ## Les migrations
 
