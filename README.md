@@ -56,6 +56,11 @@ drush @kg mr --group=kgaut
 drush @kg cim --source=modules/kgaut_migrate/config/install --partial -y
 drush @kg mi --group=kgaut
 ```
+
+ou en une ligne :
+```
+drush @kg mr --group=kgaut && drush @kg cim --source=modules/kgaut_migrate/config/install --partial -y && drush @kg mi --group=kgaut
+```
 ## Les migrations
 
 ### Fichiers
