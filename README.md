@@ -97,21 +97,33 @@ Migration des noeuds du type de contenu `story` (le site est à l'origine un d6)
 
 Particularités :
   - Import d'un champ « image » (`field_article_image` vers `field_image`)
+  - Le champ body est parsé pour récupérer les images insérées via IMCE,
+  les rapatrier et les trasnferer dans le dossier « public:// » dans
+  un sous dossier spéficique. (voir le processeur `KgautFixBodyImagePathProcess`).
 
 #### kgaut_page_node
 Migration des noeuds du type de contenu `page` vers `page`.
   - Configuration : `migrate_plus.migration.kgaut_page_node.yml`
   - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\PageNodeMigrateSource.php`
+  - Le champ body est parsé pour récupérer les images insérées via IMCE,
+  les rapatrier et les trasnferer dans le dossier « public:// » dans
+  un sous dossier spéficique. (voir le processeur `KgautFixBodyImagePathProcess`).
 
 #### kgaut_realisation_node
 Migration des noeuds du type de contenu `realisation` vers `realisation`.
   - Configuration : `migrate_plus.migration.kgaut_realisation_node.yml`
   - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\RealisationNodeMigrateSource.php`
+  - Le champ body est parsé pour récupérer les images insérées via IMCE,
+  les rapatrier et les trasnferer dans le dossier « public:// » dans
+  un sous dossier spéficique. (voir le processeur `KgautFixBodyImagePathProcess`).
 
 #### kgaut_snippets_node
 Migration des noeuds du type de contenu `snippet` vers `snippet`.
   - Configuration : `migrate_plus.migration.kgaut_snippets_node.yml`
   - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\SnippetNodeMigrateSource.php`
+  - Le champ body est parsé pour récupérer les images insérées via IMCE,
+  les rapatrier et les trasnferer dans le dossier « public:// » dans
+  un sous dossier spéficique. (voir le processeur `KgautFixBodyImagePathProcess`).
 
 ## Les commandes drush
 
