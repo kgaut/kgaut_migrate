@@ -144,4 +144,6 @@ Migration des noeuds du type de contenu `snippet` vers `snippet`.
  - `drush @kg ms` : status des migration
  - `drush @kg mi kgaut_article_tags` : lancer une migration
  - `drush @kg mi --group=kgaut` : lancer un groupe de migrations
+ - `drush @kg mr kgaut_article_tags` : Annuler une migration
+ - `drush @kg mr --group=kgaut` : Annuler un groupe de migrations
  - `drush @kg mrs kgaut_article_tags` remettre à zero une migration plantée
