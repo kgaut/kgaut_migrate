@@ -29,14 +29,12 @@ process:
   # the internal field value being set, and put it in quotes because / is a
   # YAML special character.
   'body/value':
-    -
       plugin: kgaut_fix_body_image_path_process
       images_source: '/sites/kgaut.net/files'
       url_source: 'https://kgaut.net/'
       images_destination: 'public://wysiwyg/'
       source: body_value
   'body/summary':
-    -
       plugin: kgaut_fix_body_image_path_process
       images_source: '/sites/kgaut.net/files'
       url_source: 'https://kgaut.net/'

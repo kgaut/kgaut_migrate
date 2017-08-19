@@ -36,6 +36,8 @@ class RealisationNodeMigrateSource extends SqlBase {
     $query->leftJoin('field_data_field_realisation_missions', 'frm', 'frm.entity_id = n.nid AND frm.entity_type = \'node\' AND frm.deleted = 0');
     $query->fields('fdb', ['body_value', 'body_summary']);
     $query->fields('frm', ['field_realisation_missions_value']);
+    $query->leftJoin('field_data_field_year', 'fy', 'fy.entity_id = n.nid AND fy.entity_type = \'node\' AND frm.deleted = 0');
+    $query->addField('fy','field_year_value','realisation_date');
 
     return $query;
   }
@@ -79,6 +81,14 @@ class RealisationNodeMigrateSource extends SqlBase {
     $query->condition('bundle', 'realisation');
     $terms = $query->execute()->fetchCol();
     $row->setSourceProperty('tags', $terms);
+    $date = \DateTime::createFromFormat('U', $row->getSourceProperty('realisation_date'));
+    if($date) {
+      $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+      $row->setSourceProperty('realisation_date', $date->format('Y-m-d'));
+    }
+    else {
+      $row->setSourceProperty('realisation_date', NULL);
+    }
     return parent::prepareRow($row);
   }
 
