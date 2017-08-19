@@ -63,13 +63,18 @@ drush @kg mr --group=kgaut && drush @kg cim --source=modules/kgaut_migrate/confi
 ```
 ## Les migrations
 
-### Fichiers
+### Divers
 
-#### kgaut_managed_files
+#### Fichiers - kgaut_managed_files
 Migration des fichiers (`managed_file`),
   - Configuration : `migrate_plus.migration.kgaut_managed_files.yml`
   - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\KgautManagedFiles.php`
 Ce script importe maintenant les fichiers.
+
+#### Alias - kgaut_url_alias
+Migration des alias d'url du module path,
+  - Configuration : `migrate_plus.migration.kgaut_url_alias.yml`
+  - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\KgautUrlAliasMigration.php`
 
 ### Termes de Taxonomy
 
