@@ -59,6 +59,7 @@ process:
 migration_dependencies:
   optional:
     - kgaut_snippet_tags
+    - kgaut_managed_files
 dependencies:
   enforced:
     module:

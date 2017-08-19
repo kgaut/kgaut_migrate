@@ -64,6 +64,7 @@ process:
 migration_dependencies:
   optional:
     - kgaut_article_tags
+    - kgaut_managed_files
 dependencies:
   enforced:
     module:
