@@ -23,7 +23,8 @@ class KgautFixBodyImagePathProcess extends ProcessPluginBase {
     $images_source = $this->configuration['images_source'];
     $destination = $this->configuration['images_destination'];
     $url_source = $this->configuration['url_source'];
-
+    /** @var \Drupal\kgaut_tools\StringCleaner $stringCleaner */
+    $stringCleaner = \Drupal::service('kgaut_tools.stringcleaner');
     preg_match_all('/<img[^>]+>/i', $html, $result);
 
     if (!empty($result[0])) {
@@ -48,7 +49,9 @@ class KgautFixBodyImagePathProcess extends ProcessPluginBase {
               else {
                 $file_contents = file_get_contents($url_source . $filepath);
               }
-              $new_destination = $destination_finale . '/' . $filename;
+
+              $filename_destination = $stringCleaner->clean($row->getSourceProperty('title') . '-' . urldecode($filename));
+              $new_destination = $destination_finale . '/' . $filename_destination;
 
               if (!empty($file_contents)) {
 

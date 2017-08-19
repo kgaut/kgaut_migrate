@@ -7,4 +7,5 @@ package: Kgaut.NET
 dependencies:
   - migrate
   - migrate_tools
+  - kgaut_tools
   - migrate_plus
