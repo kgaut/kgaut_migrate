@@ -2,7 +2,7 @@ id: kgaut_url_alias
 label: URL aliases
 migration_group: kgaut
 source:
-  plugin: d7_url_alias
+  plugin: kgaut_url_alias_migration
   constants:
     slash: '/'
 process:
