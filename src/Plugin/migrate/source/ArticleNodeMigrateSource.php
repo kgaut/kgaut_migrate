@@ -15,7 +15,11 @@ use Drupal\migrate\Row;
 class ArticleNodeMigrateSource extends SqlBase {
 
   /**
-   * {@inheritdoc}
+   * La fonction « query » ne doit retourner qu'une seule ligne par contenu à
+   * importer (ici un noeud).
+   * Le champ « tags » n'est donc pas importé ici car tout contenu avec deux
+   * tags créerai automatiquement deux lignes. Pour récupérer les tags, la
+   * méthode « prepareRow » est utilisée (voir plus pas).
    */
   public function query() {
     $query = $this->select('node', 'n');
@@ -57,12 +61,12 @@ class ArticleNodeMigrateSource extends SqlBase {
     ];
   }
 
+  /**
+   * Cette methode sert à effectuer des traitements sur chaque ligne récupérée
+   * par la méthode query(). Comme expliqué plus haut, on s'en sert ici pour
+   * récupérer les tags des contenus (champs multiple).
+   */
   public function prepareRow(Row $row) {
-    /**
-     * As explained above, we need to pull the style relationships into our
-     * source row here, as an array of 'style' values (the unique ID for
-     * the beer_term migration).
-     */
     $query = $this->select('field_data_taxonomy_vocabulary_3', 'ft');
     $query->addField('ft', 'taxonomy_vocabulary_3_tid', 'tid');
     $query->condition('entity_id', $row->getSourceProperty('nid'));
