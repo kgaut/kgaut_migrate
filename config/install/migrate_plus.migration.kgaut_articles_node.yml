@@ -1,16 +1,18 @@
-# Migration configuration for beer content.
 id: kgaut_articles_node
 label: Articles de blog
 migration_group: kgaut
 source:
+  # doit correspondre à l'id de notre classe d'import source (CF : ArticleNodeMigrateSource.php)
   plugin: article_node
 destination:
   plugin: entity:node
 process:
-  # Hardcode the destination node type (bundle) as 'migrate_example_beer'.
+  # Le type de contenu « article » est défini en dur.
   type:
     plugin: default_value
     default_value: article
+  # On map les propriété dans le sens :
+  # NOM_DESTINATION : NOM_SOURCE (nom source étant celui dans la requète sql)
   title: title
   nid: nid
   vid: vid
@@ -23,11 +25,9 @@ process:
     plugin: migration
     migration: kgaut_article_tags
     source: tags
-  # Some Drupal fields may have multiple components we may want to set
-  # separately. For example, text fields may have summaries (teasers) in
-  # addition to the full text value. We use / to separate the field name from
-  # the internal field value being set, and put it in quotes because / is a
-  # YAML special character.
+  # les champs drupal avec des valeur multiples, comme les champs
+  # text_formated (avec value / summary / format) doivent être définis séparement
+  # sous la forme 'champ/clé'
   'body/value':
       plugin: kgaut_fix_body_image_path_process
       images_source: '/sites/kgaut.net/files'
@@ -43,22 +43,16 @@ process:
   'body/format':
     plugin: default_value
     default_value: 'full_html'
+  # les champs drupal avec des valeur multiples, comme les champs
+  # images (avec target_id / alt / title ...) doivent être définis séparement
+  # sous la forme 'champ/clé'
   'field_image/target_id': field_article_image_fid
   'field_image/alt': field_article_image_alt
   'field_image/title': field_article_image_title
   'field_image/width': field_article_image_width
   'field_image/height': field_article_image_height
-# Our beer nodes have references to terms and users, so we want those to be
-# imported first. We make that dependency explicit here - by putting those
-# migrations under the 'required' key, we ensure that the tools will prevent
-# us from running the beer_node migration unless the beer_term and beer_user
-# migrations are complete (although we can override the dependency check by
-# passing --force to the drush migrate-import command). We can also add
-# 'optional' dependencies - these affect the order in which migrations are
-# displayed, and run by default, but does not force you run them in that
-# order.
-# The general rule of thumb is that any migrations referenced by migration
-# process plugins should be required here.
+# Définition ici de dépendances pour les les imports des fichiers et des termes de taxo
+# se fassent avant l'import de ce type de contenu.
 migration_dependencies:
   optional:
     - kgaut_article_tags
