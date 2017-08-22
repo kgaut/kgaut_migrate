@@ -76,6 +76,11 @@ Migration des alias d'url du module path,
   - Configuration : `migrate_plus.migration.kgaut_url_alias.yml`
   - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\KgautUrlAliasMigration.php`
 
+#### Commentaires - kgaut_commentaires
+Migration des commentaires attachés aux articles & snippets
+  - Configuration : `migrate_plus.migration.kgaut_commentaires.yml`
+  - Source : `Drupal\kgaut_migrate\Plugin\migrate\source\KgautCommentairesMigrateSource.php`
+
 ### Termes de Taxonomy
 
 #### kgaut_article_tags
