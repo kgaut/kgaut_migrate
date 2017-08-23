@@ -45,9 +45,9 @@ process:
     plugin: iterator
     source: paragraph_items
     process:
-      target_id: value
-      delta: delta
-      revision_id: revision_id
+      target_id: paragraph_value
+      delta: paragraph_delta
+      target_revision_id: paragraph_revision_id
 migration_dependencies:
   optional:
     - kgaut_managed_files
