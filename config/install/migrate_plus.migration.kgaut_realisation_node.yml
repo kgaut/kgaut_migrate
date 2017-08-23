@@ -50,17 +50,17 @@ process:
     plugin: default_value
     default_value: 'full_html'
   field_realisation_date : realisation_date
-# Our beer nodes have references to terms and users, so we want those to be
-# imported first. We make that dependency explicit here - by putting those
-# migrations under the 'required' key, we ensure that the tools will prevent
-# us from running the beer_node migration unless the beer_term and beer_user
-# migrations are complete (although we can override the dependency check by
-# passing --force to the drush migrate-import command). We can also add
-# 'optional' dependencies - these affect the order in which migrations are
-# displayed, and run by default, but does not force you run them in that
-# order.
-# The general rule of thumb is that any migrations referenced by migration
-# process plugins should be required here.
+  # Pour le champs « field_images » qui est multiple, on utilise un intérateur
+  # qui parcours un tableau de tableaux associatifs, et on référencie les clées
+  field_images :
+    plugin: iterator
+    source: screenshots
+    process:
+      target_id: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
 migration_dependencies:
   optional:
     - kgaut_realisation_tags

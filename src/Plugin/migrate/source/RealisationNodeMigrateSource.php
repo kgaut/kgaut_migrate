@@ -81,6 +81,7 @@ class RealisationNodeMigrateSource extends SqlBase {
     $query->condition('bundle', 'realisation');
     $terms = $query->execute()->fetchCol();
     $row->setSourceProperty('tags', $terms);
+
     $date = \DateTime::createFromFormat('U', $row->getSourceProperty('realisation_date'));
     if($date) {
       $date->setTimezone(new \DateTimeZone('Europe/Paris'));
@@ -89,6 +90,20 @@ class RealisationNodeMigrateSource extends SqlBase {
     else {
       $row->setSourceProperty('realisation_date', NULL);
     }
+
+    //récupération des screenshots
+    $query = $this->select('field_data_field_screenshot', 'fs');
+    $query->condition('entity_id', $row->getSourceProperty('nid'));
+    $query->condition('bundle', 'realisation');
+    $query->addField('fs', 'delta', 'delta');
+    $query->addField('fs', 'field_screenshot_fid', 'fid');
+    $query->addField('fs', 'field_screenshot_alt', 'alt');
+    $query->addField('fs', 'field_screenshot_title', 'title');
+    $query->addField('fs', 'field_screenshot_width', 'width');
+    $query->addField('fs', 'field_screenshot_height', 'height');
+    $files = $query->execute()->fetchAllAssoc('fid');
+    $row->setSourceProperty('screenshots', $files);
+
     return parent::prepareRow($row);
   }
 
