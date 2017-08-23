@@ -41,9 +41,17 @@ process:
   'body/format':
     plugin: default_value
     default_value: 'full_html'
+  field_contenu:
+    plugin: iterator
+    source: paragraph_items
+    process:
+      target_id: value
+      delta: delta
+      revision_id: revision_id
 migration_dependencies:
   optional:
     - kgaut_managed_files
+    - kgaut_paragraphs_contenus
 dependencies:
   enforced:
     module:

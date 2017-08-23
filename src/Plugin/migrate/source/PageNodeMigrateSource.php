@@ -32,8 +32,9 @@ class PageNodeMigrateSource extends SqlBase {
     $query = $this->select('node', 'n');
     $query->condition('n.type', 'page');
     $query->fields('n', ['nid', 'vid', 'title', 'status', 'created', 'changed', 'promote', 'sticky', 'uid']);
-    $query->leftJoin('field_data_body', 'fdb', 'fdb.entity_id = n.nid AND entity_type = \'node\' AND deleted = 0');
+    $query->leftJoin('field_data_body', 'fdb', 'fdb.entity_id = n.nid AND fdb.entity_type = \'node\' AND fdb.deleted = 0');
     $query->fields('fdb', ['body_value', 'body_summary']);
+
 
     return $query;
   }
@@ -63,6 +64,21 @@ class PageNodeMigrateSource extends SqlBase {
         'alias' => 'n',
       ],
     ];
+  }
+
+  public function prepareRow(Row $row) {
+    $query = $this->select('field_data_field_contenu', 'fdc');
+    $query->condition('fdc.entity_id', $row->getSourceProperty('nid'));
+    $query->condition('fdc.bundle', 'page');
+    $query->addField('fdc', 'field_contenu_value', 'paragraph_value');
+    $query->addField('fdc', 'field_contenu_revision_id', 'paragraph_revision_id');
+    $query->addField('fdc', 'delta', 'paragraph_delta');
+    $query->orderBy('fdc.delta');
+    $paragraphs = $query->execute()->fetchAllAssoc('paragraph_value');
+    dd($paragraphs);
+    $row->setSourceProperty('paragraph_items', $paragraphs);
+
+    return parent::prepareRow($row);
   }
 
 }

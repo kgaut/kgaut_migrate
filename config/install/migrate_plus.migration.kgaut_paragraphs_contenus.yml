@@ -1,0 +1,33 @@
+id: kgaut_paragraphs_contenus
+label: Paragraphs « Contenus »
+migration_group: kgaut
+source:
+  plugin: kgaut_paragraphs_contenus
+destination:
+  plugin: entity:paragraph
+process:
+  id: idem_id
+  revision_id: revision_id
+  type:
+    plugin: default_value
+    default_value: 'contenu'
+  langcode:
+    plugin: default_value
+    default_value: 'fr'
+  field_titre: title
+  'field_image/target_id': image_fid
+  'field_image/alt': image_alt
+  'field_image/title': image_title
+  'field_image/width': image_width
+  'field_image/height': image_height
+  'field_wysiwyg/value': field_wysiwyg_value
+  'field_wysiwyg/format':
+    plugin: default_value
+    default_value: 'full_html'
+migration_dependencies:
+  optional:
+    - kgaut_managed_files
+dependencies:
+  enforced:
+    module:
+      - kgaut_migrate
