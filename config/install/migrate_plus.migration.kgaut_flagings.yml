@@ -1,0 +1,27 @@
+id: kgaut_flagings
+label: flags
+migration_group: kgaut
+source:
+  plugin: kgaut_flagings
+destination:
+  plugin: entity:flagging
+process:
+  id: flagging_id
+  flag_id:
+    plugin: default_value
+    default_value: like
+  entity_type: entity_type
+  entity_id: entity_id
+  global:
+    plugin: default_value
+    default_value: 0
+  uid: uid
+  created: timestamp
+migration_dependencies:
+  optional:
+    - kgaut_articles_node
+    - kgaut_snippets_node
+dependencies:
+  enforced:
+    module:
+      - kgaut_migrate

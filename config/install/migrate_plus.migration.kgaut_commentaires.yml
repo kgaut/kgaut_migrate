@@ -11,10 +11,10 @@ process:
   entity_id: nid
   entity_type:
     plugin: default_value
-    default_value: node
+    default_value: 'node'
   comment_type:
     plugin: default_value
-    default_value: comment
+    default_value: 'comment'
   field_name: comment_type
   subject: subject
   uid: uid
