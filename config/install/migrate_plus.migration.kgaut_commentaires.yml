@@ -3,6 +3,8 @@ label: Comments
 migration_group: kgaut
 source:
   plugin: kgaut_commentaires_migrate_source
+destination:
+  plugin: entity:comment
 process:
   cid: cid
   pid: pid
@@ -25,9 +27,11 @@ process:
   status: status
   thread: thread
   comment_body: comment_body_value
-destination:
-  plugin: entity:comment
 migration_dependencies:
   optional:
     - kgaut_articles_node
     - kgaut_snippets_node
+dependencies:
+  enforced:
+    module:
+      - kgaut_migrate
