@@ -45,7 +45,7 @@ process:
   'body/format':
     plugin: default_value
     default_value: 'full_html'
-  'field_realisation_missions/value': field_realisation_missions_value
+  'field_realisation_missions/value': missions
   'field_realisation_missions/format':
     plugin: default_value
     default_value: 'full_html'

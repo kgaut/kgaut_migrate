@@ -136,8 +136,10 @@ Migration des noeuds du type de contenu `realisation` vers `realisation`.
     un sous dossier spéficique. Les fichiers sont aussi renommés au
     passage.
 
-Cette migration contient aussi un champ multiple `field_images` qui est
+Particularités :
+  - Cette migration contient aussi un champ multiple `field_images` qui est
 importé à l'aide du plugin iterator
+  - Cette migration fusionne deux champs "text_format" en un seul, cf méthode `prepareRow();`
 
 #### kgaut_snippets_node
 Migration des noeuds du type de contenu `snippet` vers `snippet`.

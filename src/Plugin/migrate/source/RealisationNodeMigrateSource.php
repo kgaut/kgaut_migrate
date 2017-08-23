@@ -33,10 +33,8 @@ class RealisationNodeMigrateSource extends SqlBase {
     $query->condition('n.type', 'realisation');
     $query->fields('n', ['nid', 'vid', 'title', 'status', 'created', 'changed', 'promote', 'sticky', 'uid']);
     $query->leftJoin('field_data_body', 'fdb', 'fdb.entity_id = n.nid AND fdb.entity_type = \'node\' AND fdb.deleted = 0');
-    $query->leftJoin('field_data_field_realisation_missions', 'frm', 'frm.entity_id = n.nid AND frm.entity_type = \'node\' AND frm.deleted = 0');
     $query->fields('fdb', ['body_value', 'body_summary']);
-    $query->fields('frm', ['field_realisation_missions_value']);
-    $query->leftJoin('field_data_field_year', 'fy', 'fy.entity_id = n.nid AND fy.entity_type = \'node\' AND frm.deleted = 0');
+    $query->leftJoin('field_data_field_year', 'fy', 'fy.entity_id = n.nid AND fy.entity_type = \'node\' AND fy.deleted = 0');
     $query->addField('fy','field_year_value','realisation_date');
 
     return $query;
@@ -70,6 +68,20 @@ class RealisationNodeMigrateSource extends SqlBase {
   }
 
   public function prepareRow(Row $row) {
+    //merge des deux champs
+    $query = $this->select('field_data_field_realisation_missions', 'frm');
+    $query->condition('frm.entity_id', $row->getSourceProperty('nid'));
+    $query->condition('frm.bundle', 'realisation');
+    $query->leftJoin('field_data_field_realisation_features', 'frf', 'frf.entity_id = frm.entity_id AND frf.entity_type = \'node\'');
+
+    $query->fields('frm', ['field_realisation_missions_value']);
+    $query->fields('frf', ['field_realisation_features_value']);
+    $missions = $query->execute()->fetchAssoc();
+
+    $missions = '<h3>Missions</h3>' . $missions['field_realisation_missions_value'] . '<h3>Caractéristiques</h3>' . $missions['field_realisation_features_value'];
+
+    $row->setSourceProperty('missions', $missions);
+
     /**
      * As explained above, we need to pull the style relationships into our
      * source row here, as an array of 'style' values (the unique ID for
