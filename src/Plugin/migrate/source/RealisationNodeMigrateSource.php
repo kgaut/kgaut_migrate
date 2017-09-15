@@ -121,7 +121,7 @@ class RealisationNodeMigrateSource extends SqlBase {
     $query->condition('entity_id', $row->getSourceProperty('nid'));
     $query->condition('bundle', 'realisation');
     $query->addField('fu', 'field_url_url', 'url');
-    $query->addField('fu', 'field_url_title', 'url');
+    $query->addField('fu', 'field_url_title', 'title');
     $query->addField('fu', 'delta', 'delta');
     $urls = $query->execute()->fetchAllAssoc('delta');
     $row->setSourceProperty('url', $urls);
