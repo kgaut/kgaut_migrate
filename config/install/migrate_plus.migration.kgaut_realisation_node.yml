@@ -61,6 +61,15 @@ process:
       title: title
       width: width
       height: height
+  # Pour le champs « field_url » qui est multiple, on utilise un intérateur
+  # qui parcours un tableau de tableaux associatifs, et on référencie les clées
+  field_url :
+    plugin: iterator
+    source: url
+    process:
+      delta: delta
+      uri: url
+      title: title
 migration_dependencies:
   optional:
     - kgaut_realisation_tags

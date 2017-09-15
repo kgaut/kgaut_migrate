@@ -116,6 +116,16 @@ class RealisationNodeMigrateSource extends SqlBase {
     $files = $query->execute()->fetchAllAssoc('fid');
     $row->setSourceProperty('screenshots', $files);
 
+    //récupération des URLS
+    $query = $this->select('field_data_field_url', 'fu');
+    $query->condition('entity_id', $row->getSourceProperty('nid'));
+    $query->condition('bundle', 'realisation');
+    $query->addField('fu', 'field_url_url', 'url');
+    $query->addField('fu', 'field_url_title', 'url');
+    $query->addField('fu', 'delta', 'delta');
+    $urls = $query->execute()->fetchAllAssoc('delta');
+    $row->setSourceProperty('url', $urls);
+
     return parent::prepareRow($row);
   }
 
