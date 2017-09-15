@@ -75,7 +75,6 @@ class PageNodeMigrateSource extends SqlBase {
     $query->addField('fdc', 'delta', 'paragraph_delta');
     $query->orderBy('fdc.delta');
     $paragraphs = $query->execute()->fetchAllAssoc('paragraph_value');
-    dd($paragraphs);
     $row->setSourceProperty('paragraph_items', $paragraphs);
 
     return parent::prepareRow($row);

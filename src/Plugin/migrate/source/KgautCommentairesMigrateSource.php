@@ -3,6 +3,7 @@
 namespace Drupal\kgaut_migrate\Plugin\migrate\source;
 
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
+use Drupal\migrate\Row;
 
 /**
  * Drupal 7 comment source from database.
@@ -20,7 +21,7 @@ class KgautCommentairesMigrateSource extends SqlBase {
     $query = $this->select('comment', 'c')->fields('c');
     $query->innerJoin('node', 'n', 'c.nid = n.nid');
     $query->innerJoin('field_data_comment_body', 'fdcb', 'fdcb.entity_id = c.cid');
-    $query->fields('fdcb', ['	comment_body_value']);
+    $query->fields('fdcb', ['comment_body_value', 'comment_body_format']);
 
     $query->addField('n', 'type', 'node_type');
     $query->orderBy('c.created');
@@ -57,6 +58,21 @@ class KgautCommentairesMigrateSource extends SqlBase {
   public function getIds() {
     $ids['cid']['type'] = 'integer';
     return $ids;
+  }
+
+
+  public function prepareRow(Row $row) {
+    if ($row->getSourceProperty('comment_body_format') == 1) {
+      $row->setSourceProperty('comment_body_format', 'full_html');
+    }
+    elseif ($row->getSourceProperty('comment_body_format') == 2) {
+      $row->setSourceProperty('comment_body_format', 'restricted_html');
+    }
+    elseif ($row->getSourceProperty('comment_body_format') == 3) {
+      $row->setSourceProperty('comment_body_format', 'restricted_html');
+    }
+
+    return parent::prepareRow($row);
   }
 
 }

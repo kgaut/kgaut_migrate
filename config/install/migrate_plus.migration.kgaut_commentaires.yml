@@ -29,7 +29,8 @@ process:
   changed: changed
   status: status
   thread: thread
-  comment_body: comment_body_value
+  'comment_body/value': comment_body_value
+  'comment_body/format': comment_body_format
 migration_dependencies:
   optional:
     - kgaut_articles_node
