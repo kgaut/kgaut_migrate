@@ -15,6 +15,9 @@ process:
   comment_type:
     plugin: default_value
     default_value: 'comment'
+  field_name:
+    plugin: default_value
+    default_value: 'comment'
   field_name: comment_type
   subject: subject
   uid: uid
