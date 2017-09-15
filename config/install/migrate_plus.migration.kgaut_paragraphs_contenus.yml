@@ -15,6 +15,7 @@ process:
     plugin: default_value
     default_value: 'fr'
   field_titre: title
+  field_template: template
   'field_image/target_id': image_fid
   'field_image/alt': image_alt
   'field_image/title': image_title

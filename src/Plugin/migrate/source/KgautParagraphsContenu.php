@@ -28,6 +28,9 @@ class KgautParagraphsContenu extends SqlBase {
     $query->leftJoin('field_data_title_field', 'ft', 'p.item_id = ft.entity_id AND ft.entity_type = \'paragraphs_item\' AND ft.deleted = 0');
     $query->addField('ft', 'title_field_value', 'title');
 
+    $query->leftJoin('field_data_field_template', 'fdt', 'p.item_id = fdt.entity_id AND fdt.entity_type = \'paragraphs_item\' AND fdt.deleted = 0');
+    $query->addField('fdt', 'field_template_value', 'template');
+
     $query->leftJoin('field_data_field_article_image', 'fai', 'p.item_id = fai.entity_id AND fai.entity_type = \'paragraphs_item\' AND fai.deleted = 0');
     $query->addField('fai', 'field_article_image_fid', 'image_fid');
     $query->addField('fai', 'field_article_image_alt', 'image_alt');
