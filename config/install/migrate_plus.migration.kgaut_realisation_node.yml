@@ -17,8 +17,8 @@ process:
   uid: uid
   sticky: sticky
   status: status
-  created: changed
-  changed: created
+  created: created
+  changed: changed
   field_tags:
     plugin: migration
     migration: kgaut_realisation_tags

@@ -18,9 +18,9 @@ process:
   vid: vid
   uid: uid
   sticky: sticky
-  created: changed
+  created: created
+  changed: changed
   status: status
-  changed: created
   field_tags:
     plugin: migration
     migration: kgaut_article_tags
