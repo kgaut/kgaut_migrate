@@ -28,9 +28,10 @@ class KgautFixBodyImagePathProcess extends ProcessPluginBase {
     preg_match_all('/<img[^>]+>/i', $html, $result);
 
     if (!empty($result[0])) {
-
+      $i = 0;
       foreach ($result as $img_tags) {
         foreach ($img_tags as $img_tag) {
+          $i++;
 
           preg_match_all('/(alt|title|src)=("[^"]*")/i', $img_tag, $tag_attributes);
 
@@ -40,7 +41,7 @@ class KgautFixBodyImagePathProcess extends ProcessPluginBase {
 
             // Create file object from a locally copied file.
             $filename = basename($filepath);
-            $destination_finale = $destination . 'node-' . $row->getSourceProperty('nid');
+            $destination_finale = $destination . 'node-' . $stringCleaner->clean($row->getSourceProperty('title'));
             if (file_prepare_directory($destination_finale, FILE_CREATE_DIRECTORY)) {
 
               if (filter_var($filepath, FILTER_VALIDATE_URL)) {
@@ -50,7 +51,7 @@ class KgautFixBodyImagePathProcess extends ProcessPluginBase {
                 $file_contents = file_get_contents($url_source . $filepath);
               }
 
-              $filename_destination = $stringCleaner->clean($row->getSourceProperty('title') . '-' . urldecode($filename));
+              $filename_destination = $stringCleaner->clean($row->getSourceProperty('title')) . '-' . urldecode($filename);
               $new_destination = $destination_finale . '/' . $filename_destination;
 
               if (!empty($file_contents)) {
