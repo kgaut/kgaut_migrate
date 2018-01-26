@@ -1,0 +1,5 @@
+services:
+  kgaut_migrate.migrate_manager:
+    class: Drupal\kgaut_migrate\MigrateManager
+    arguments: []
+

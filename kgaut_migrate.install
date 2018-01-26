@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * Migrate snippets tags to tags
+ */
+function kgaut_migrate_8001() {
+  \Drupal::service('kgaut_migrate.migrate_manager')->migrateSnippetTags();
+}
