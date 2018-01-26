@@ -29,6 +29,8 @@ class MigrateManager {
       }
       $query = \Drupal::entityQuery('node');
       $query->condition('field_tags', $term->id(), 'IN');
+      $query->condition('type', 'snippet');
+
       $noeuds_ids = $query->execute();
       $nbNoeudsModifies = 0;
       $noeuds = Node::loadMultiple($noeuds_ids);
@@ -45,6 +47,7 @@ class MigrateManager {
         $noeud->save();
         $nbNoeudsModifies++;
       }
+      drupal_set_message('Term ' . $term->label() . ', ' . $nbNoeudsModifies . ' noeuds modifiés');
       $term->delete();
     }
   }

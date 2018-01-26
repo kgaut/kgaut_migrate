@@ -3,6 +3,6 @@
 /**
  * Migrate snippets tags to tags
  */
-function kgaut_migrate_8001() {
+function kgaut_migrate_update_8001() {
   \Drupal::service('kgaut_migrate.migrate_manager')->migrateSnippetTags();
 }
